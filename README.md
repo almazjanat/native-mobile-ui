@@ -97,4 +97,4 @@ Built for **Claude Code** (personal, project, or plugin). The `SKILL.md` format 
 
 ## License
 
-Add a license of your choice (MIT is a common pick for shareable skills) as a `LICENSE` file at the repo root.
+Released under the [MIT License](LICENSE) — free to use, modify, and share, with no warranty.
