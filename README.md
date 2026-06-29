@@ -32,7 +32,7 @@ Claude Code auto-loads any valid `SKILL.md` it finds in a watched skills directo
 ### Option 1 — personal (available in all your projects)
 
 ```bash
-git clone https://github.com/<you>/native-mobile-ui.git ~/.claude/skills/native-mobile-ui
+git clonehttps://github.com/almazjanat/native-mobile-ui.git ~/.claude/skills/native-mobile-ui
 ```
 
 Or, if you have the packaged `native-mobile-ui.skill` file (it's just a zip):
