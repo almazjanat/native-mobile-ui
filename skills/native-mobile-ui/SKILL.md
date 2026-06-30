@@ -16,6 +16,8 @@ Work in two modes with this skill:
 
 Before designing, state three things out loud (infer them if the brief doesn't say): the **platform target** (iOS, Android, or cross-platform), the **screen's single job**, and the **primary action** the user takes on it. Everything else — where the button goes, what's in the nav, what can be cut — follows from those. If it's cross-platform, decide upfront which parts are shared brand and which must defer to platform convention (see "Diverging by platform").
 
+When building, work from a coherent token set rather than improvising values per component. If the project already defines tokens, use them; if it doesn't, **read `references/tokens.md`** for a sane starter scale (spacing, type, semantic color roles, radius/elevation, motion) to adjust to the brand. Exact platform figures still come from the platform files below.
+
 ## Core principles (all platforms)
 
 These hold on every platform. Exact numbers that differ between iOS and Android live in `references/ios.md` and `references/android.md` — read the relevant one when you need a hard figure.
@@ -114,3 +116,23 @@ Each item below carries a default severity, but adjust by degree — a target at
 
 **Platform fit** (cross-platform only)
 - [ ] [Blocker] Navigation, system gestures, and core controls feel native on each platform; only the brand is shared.
+
+## Example review output
+
+Report failures first, ordered by severity, each with the concrete fix. Don't dump all 14 sections — surface what failed, note what passed in one line, and lead with what to fix before release. A good report reads like this:
+
+> **Checkout screen — iOS**
+>
+> **Blockers (fix before release)**
+> - **Touch targets** — the "Apply promo" link is ~30pt tall, below the 44pt floor. Wrap it in a 44pt hit area (`hitSlop` or padding) without changing the visual size.
+> - **Keyboard handling** — when the card-number field is focused, the "Pay" button is hidden under the keyboard. Add keyboard avoidance so the active field and submit stay visible.
+> - **States** — only the happy path exists. No error state for a declined card and no loading state on "Pay". Add both; declined-card error must say what to do next.
+>
+> **Major**
+> - **Dark mode** — not implemented; the screen is a mechanical inversion with grey-on-grey totals failing contrast. Do a real dark pass with its own tokens.
+> - **Spacing** — gutters mix 12 / 16 / 20pt. Snap to the 8pt scale (`space-4` = 16) for the screen margin.
+>
+> **Minor**
+> - **Motion** — the total updates with no feedback; a 150ms fade would signal the change.
+>
+> **Passing:** safe-area layout, back behavior, type scale, screen-reader labels on the line items.

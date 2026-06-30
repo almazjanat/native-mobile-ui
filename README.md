@@ -16,63 +16,80 @@ It triggers automatically on mobile-app UI work — including vague asks like "m
 ```
 native-mobile-ui/
 ├── README.md
-├── SKILL.md                    # core cross-platform principles + review checklist
-└── references/
-    ├── ios.md                  # Human Interface Guidelines specifics (44pt, safe area, SF Symbols…)
-    ├── android.md              # Material specifics (48dp, system back, FAB, snackbars…)
-    └── illustrations.md        # when to use illustrations, free vector sources + licenses, technique
+├── LICENSE
+├── .claude-plugin/
+│   ├── marketplace.json        # Claude Code marketplace catalog (for /plugin install)
+│   └── plugin.json             # plugin manifest
+└── skills/
+    └── native-mobile-ui/
+        ├── SKILL.md            # core cross-platform principles + review checklist + example review output
+        └── references/
+            ├── ios.md          # Human Interface Guidelines specifics (44pt, safe area, SF Symbols…)
+            ├── android.md      # Material specifics (48dp, system back, FAB, snackbars…)
+            ├── tokens.md       # starter token set (spacing, type, semantic color, radius, motion)
+            └── illustrations.md # when to use illustrations, free vector sources + licenses, technique
 ```
 
-The skill uses progressive disclosure: `SKILL.md` holds the platform-agnostic principles and the checklist, and the platform/illustration files are loaded only when a task actually needs them.
+The repo is packaged as a **Claude Code plugin** (so it installs from a marketplace) that ships one skill, `native-mobile-ui`, under `skills/`. The skill uses progressive disclosure: `SKILL.md` holds the platform-agnostic principles and the checklist, and the platform/token/illustration files are loaded only when a task actually needs them.
 
 ## Installation (Claude Code)
 
-Claude Code auto-loads any valid `SKILL.md` it finds in a watched skills directory — no registration step. Pick one of these.
+This repo is a Claude Code plugin marketplace. The recommended way to install is through the marketplace; the other options copy the bare skill if you prefer.
 
-### Option 1 — personal (available in all your projects)
+### Option 1 — Claude Code marketplace (recommended)
 
-```bash
-git clonehttps://github.com/almazjanat/native-mobile-ui.git ~/.claude/skills/native-mobile-ui
+Inside Claude Code, add this repo as a marketplace, then install the plugin:
+
+```
+/plugin marketplace add almazjanat/native-mobile-ui
+/plugin install native-mobile-ui@almaz-skills
 ```
 
-Or, if you have the packaged `native-mobile-ui.skill` file (it's just a zip):
+- `almazjanat/native-mobile-ui` is the GitHub repo that hosts `.claude-plugin/marketplace.json`.
+- `almaz-skills` is the marketplace's `name` (from `marketplace.json`); `native-mobile-ui` is the plugin.
+- Update later with `/plugin marketplace update almaz-skills`, and manage it under `/plugin`.
 
-```bash
-unzip native-mobile-ui.skill -d ~/.claude/skills/
+You can also add it from a local clone for testing:
+
+```
+/plugin marketplace add /path/to/native-mobile-ui
 ```
 
-Or copy the folder by hand:
+### Option 2 — personal skill (available in all your projects)
+
+Copy just the skill folder into your personal skills directory:
 
 ```bash
-cp -r native-mobile-ui ~/.claude/skills/
+git clone https://github.com/almazjanat/native-mobile-ui.git
+cp -r native-mobile-ui/skills/native-mobile-ui ~/.claude/skills/
 ```
 
-### Option 2 — project (committed to a repo, shared with your team)
+> **Windows note:** PowerShell and cmd.exe do **not** expand `~` to your home directory (only Git Bash / WSL / macOS / Linux do). In PowerShell, copy with an explicit path instead:
+> ```powershell
+> Copy-Item -Recurse native-mobile-ui\skills\native-mobile-ui "$HOME\.claude\skills\native-mobile-ui"
+> ```
+
+### Option 3 — project skill (committed to a repo, shared with your team)
 
 ```bash
 mkdir -p .claude/skills
-cp -r native-mobile-ui .claude/skills/
+cp -r native-mobile-ui/skills/native-mobile-ui .claude/skills/
 git add .claude/skills/native-mobile-ui && git commit -m "Add native-mobile-ui skill"
 ```
 
-Anyone who clones the project gets the skill. When the same skill name exists at multiple levels, the order is enterprise → personal → project → bundled (earlier wins).
-
-### Option 3 — as a Claude Code plugin (marketplace)
-
-Add a `.claude-plugin/marketplace.json` to the repo and push it to GitHub, then teammates run:
-
-```
-/plugin marketplace add <you>/native-mobile-ui
-/plugin install native-mobile-ui@<marketplace-name>
-```
+Anyone who clones the project gets the skill. When the same skill name exists at multiple levels, the order is enterprise → personal → project → plugin (earlier wins).
 
 ### Verify
 
 ```bash
-ls ~/.claude/skills/native-mobile-ui        # should list SKILL.md and references/
+# Marketplace install:
+/plugin                                      # native-mobile-ui shows as installed & enabled
+
+# Copied skill:
+ls ~/.claude/skills/native-mobile-ui         # should list SKILL.md and references/
 ```
 
-Edits inside an already-watched skills directory take effect within the current session. Creating a top-level skills directory that didn't exist when the session started requires restarting Claude Code so it can be watched.
+Plugin skills are namespaced — invoke explicitly with `/native-mobile-ui:native-mobile-ui` if needed, though Claude pulls the skill in automatically on mobile-app UI work either way. Edits inside an already-watched skills directory take effect within the current session; a newly created top-level skills directory needs a Claude Code restart to be watched.
 
 ## Usage
 
@@ -93,7 +110,8 @@ Built for **Claude Code** (personal, project, or plugin). The `SKILL.md` format 
 
 - **Swap the brand** — the principles are palette-agnostic; point the design at your own tokens.
 - **Tighten platform scope** — if you only ship iOS or only Android, you can trim the other reference file; the core principles still apply.
-- **Illustrations** — `references/illustrations.md` defaults to free vector sources (unDraw, Open Peeps, Lottie) with license notes and a one-library-per-project rule. There's an optional AI-generation branch if you use a generator like Higgsfield; edit it to match the source you actually license.
+- **Tokens** — `skills/native-mobile-ui/references/tokens.md` is a starter spacing/type/color/motion scale; replace its values with your brand's tokens.
+- **Illustrations** — `skills/native-mobile-ui/references/illustrations.md` defaults to free vector sources (unDraw, Open Peeps, Lottie) with license notes and a one-library-per-project rule. There's an optional AI-generation branch if you use a generator like Higgsfield; edit it to match the source you actually license.
 
 ## License
 

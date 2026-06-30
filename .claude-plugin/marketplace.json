@@ -1,0 +1,32 @@
+{
+  "name": "almaz-skills",
+  "owner": {
+    "name": "Almaz",
+    "email": "almaz.zh7@gmail.com"
+  },
+  "description": "Almaz's Claude Code skills.",
+  "plugins": [
+    {
+      "name": "native-mobile-ui",
+      "source": "./",
+      "description": "Design rules and a severity-tagged review checklist for native mobile app UI/UX — iOS, Android, and cross-platform (React Native, Flutter). Designs and audits phone-app screens: touch targets, safe areas, navigation, four screen states, accessibility, and illustrations.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Almaz",
+        "email": "almaz.zh7@gmail.com"
+      },
+      "homepage": "https://github.com/almazjanat/native-mobile-ui",
+      "license": "MIT",
+      "category": "design",
+      "keywords": [
+        "mobile",
+        "ui",
+        "ux",
+        "ios",
+        "android",
+        "react-native",
+        "flutter"
+      ]
+    }
+  ]
+}
