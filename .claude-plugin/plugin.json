@@ -1,6 +1,5 @@
 {
   "name": "native-mobile-ui",
-  "version": "1.0.0",
   "description": "Design rules and a severity-tagged review checklist for native mobile app UI/UX — iOS, Android, and cross-platform (React Native, Flutter).",
   "author": {
     "name": "Almaz",
