@@ -2,6 +2,8 @@
 
 Read this when a mobile task involves illustrations or art, an empty/onboarding/success screen that could carry a visual, or a question about where to source graphics. Illustrations add character and warmth, but on mobile they're easy to get wrong. This file covers *when* they earn their place, *how* to keep them consistent and performant, *where* to get them for free, and an optional AI-generation path.
 
+**Confirm with the developer first.** Before adding an illustration to a screen where one fits, and unless the brief already specifies it, ask two things in order: (1) include an illustration here at all? and only if yes, (2) which source — their own assets, a free vector library below, or AI-generated? Lock that answer in and keep every illustration in the app consistent with it. Don't raise the question on screens where illustrations don't belong (settings, forms, dense lists/feeds, data tables).
+
 ## When an illustration earns its place
 
 Use one only where it does a job. Good places on mobile:
